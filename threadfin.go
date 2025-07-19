@@ -125,6 +125,12 @@ func main() {
 		return
 	}
 
+	err := src.Init()
+	if err != nil {
+		src.ShowError(err, 0)
+		os.Exit(0)
+	}
+
 	system.Dev = *dev
 
 	// Systeminformationen anzeigen
@@ -149,6 +155,7 @@ func main() {
 	}
 
 	if bindIpAddress != nil && len(*bindIpAddress) > 0 {
+		fmt.Println("Setting the Bind IP address:", *bindIpAddress)
 		system.IPAddress = *bindIpAddress
 	}
 
@@ -175,23 +182,11 @@ func main() {
 
 		system.Flag.Restore = *restore
 
-		err := src.Init()
-		if err != nil {
-			src.ShowError(err, 0)
-			os.Exit(0)
-		}
-
 		err = src.ThreadfinRestoreFromCLI(*restore)
 		if err != nil {
 			src.ShowError(err, 0)
 		}
 
-		os.Exit(0)
-	}
-
-	err := src.Init()
-	if err != nil {
-		src.ShowError(err, 0)
 		os.Exit(0)
 	}
 
