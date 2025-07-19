@@ -114,6 +114,11 @@
       "title": "Exclude",
       "placeholder": "ES,IT",
       "description": "Channel name must not contain.<br>(Comma separated) Comma means or"
+    },
+    "filter1080p": {
+      "title": "1080p Filter",
+      "placeholder": "",
+      "description": "Only allow channels with 1080p resolution. This will probe each channel to check its resolution."
     }
   },
   "playlist": {

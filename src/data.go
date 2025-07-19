@@ -768,6 +768,7 @@ func createFilterRules() (err error) {
 			dataFilter.CaseSensitive = filter.CaseSensitive
 			dataFilter.Rule = filter.Filter
 			dataFilter.Type = filter.Type
+			dataFilter.Filter1080p = filter.Filter1080p
 
 			Data.Filter = append(Data.Filter, dataFilter)
 

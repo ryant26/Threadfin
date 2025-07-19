@@ -137,6 +137,13 @@ func filterThisStream(s interface{}) (status bool, liveEvent bool) {
 				}
 			}
 
+			// Check 1080p resolution if filter is enabled
+			if filter.Filter1080p {
+				if !isChannel1080p(stream) {
+					return false, liveEvent
+				}
+			}
+
 			return true, liveEvent
 
 		}
@@ -183,6 +190,28 @@ func checkConditions(streamValues, conditions, coType string) (status bool) {
 	}
 
 	return
+}
+
+// Check if channel has 1080p resolution
+func isChannel1080p(stream map[string]string) bool {
+	url, ok := stream["url"]
+	if !ok || url == "" {
+		return false
+	}
+
+	// Create a request struct for the existing probeChannel function
+	request := RequestStruct{
+		ProbeURL: url,
+	}
+
+	// Use the existing probeChannel function to get stream information
+	resolution, _, _, err := probeChannel(request)
+	if err != nil {
+		return false
+	}
+
+	// Check if resolution is 1080p
+	return strings.Contains(resolution, "1080")
 }
 
 // Threadfin M3U Datei erstellen

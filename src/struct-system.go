@@ -179,6 +179,7 @@ type Filter struct {
 	LiveEvent     bool
 	Rule          string
 	Type          string
+	Filter1080p   bool
 }
 
 // XEPGChannelStruct : XEPG Struktur
@@ -247,6 +248,7 @@ type FilterStruct struct {
 	Description    string `json:"description"`
 	Exclude        string `json:"exclude"`
 	Filter         string `json:"filter"`
+	Filter1080p    bool   `json:"filter1080p"`
 	Include        string `json:"include"`
 	Name           string `json:"name"`
 	Rule           string `json:"rule,omitempty"`
