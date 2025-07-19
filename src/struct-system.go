@@ -50,12 +50,13 @@ type SystemStruct struct {
 	}
 
 	Flag struct {
-		Branch  string
-		Debug   int
-		Info    bool
-		Port    string
-		Restore string
-		SSDP    bool
+		Branch        string
+		Debug         int
+		Info          bool
+		Port          string
+		BindIpAddress string
+		Restore       string
+		SSDP          bool
 	}
 
 	Folder struct {

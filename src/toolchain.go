@@ -358,6 +358,7 @@ func resolveHostIP() error {
 				if networkIP.IP.To4() != nil {
 					// Skip unwanted IPs
 					if !strings.HasPrefix(ip, "169.254") {
+						fmt.Println("============Setting IP Address unwanted:============", ip)
 						System.IPAddressesV4 = append(System.IPAddressesV4, ip)
 						System.IPAddress = ip
 					}
@@ -369,6 +370,7 @@ func resolveHostIP() error {
 	}
 
 	if len(System.IPAddress) == 0 {
+		fmt.Println("============No IP address found, using first available IP address============")
 		if len(System.IPAddressesV4) > 0 {
 			System.IPAddress = System.IPAddressesV4[0]
 		} else if len(System.IPAddressesV6) > 0 {

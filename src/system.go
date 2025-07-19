@@ -185,6 +185,10 @@ func loadSettings() (settings SettingsStruct, err error) {
 		settings.Port = System.Flag.Port
 	}
 
+	if len(System.Flag.BindIpAddress) > 0 {
+		settings.BindIpAddress = System.Flag.BindIpAddress
+	}
+
 	if len(System.Flag.Branch) > 0 {
 		settings.Branch = System.Flag.Branch
 		showInfo(fmt.Sprintf("Git Branch:Switching Git Branch to -> %s", settings.Branch))

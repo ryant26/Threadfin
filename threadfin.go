@@ -125,29 +125,8 @@ func main() {
 		return
 	}
 
-	err := src.Init()
-	if err != nil {
-		src.ShowError(err, 0)
-		os.Exit(0)
-	}
-
+	// Process command line flags BEFORE calling Init()
 	system.Dev = *dev
-
-	// Systeminformationen anzeigen
-	if *info {
-
-		system.Flag.Info = true
-
-		err := src.Init()
-		if err != nil {
-			src.ShowError(err, 0)
-			os.Exit(0)
-		}
-
-		src.ShowSystemInfo()
-		return
-
-	}
 
 	// Webserver Port
 	if len(*port) > 0 {
@@ -156,6 +135,7 @@ func main() {
 
 	if bindIpAddress != nil && len(*bindIpAddress) > 0 {
 		fmt.Println("Setting the Bind IP address:", *bindIpAddress)
+		system.Flag.BindIpAddress = *bindIpAddress
 		system.IPAddress = *bindIpAddress
 	}
 
@@ -175,6 +155,28 @@ func main() {
 	// Speicherort für die Konfigurationsdateien
 	if len(*configFolder) > 0 {
 		system.Folder.Config = *configFolder
+	}
+
+	err := src.Init()
+	if err != nil {
+		src.ShowError(err, 0)
+		os.Exit(0)
+	}
+
+	// Systeminformationen anzeigen
+	if *info {
+
+		system.Flag.Info = true
+
+		err := src.Init()
+		if err != nil {
+			src.ShowError(err, 0)
+			os.Exit(0)
+		}
+
+		src.ShowSystemInfo()
+		return
+
 	}
 
 	// Backup wiederherstellen
